@@ -3,10 +3,74 @@ use serde::{Deserialize, Serialize};
 #[derive(Serialize, Deserialize)]
 #[serde(rename_all = "PascalCase")] // new line
 pub struct GameData{
+  GridData: Vec<Vec<Zone>>,
+  PlayerData: PlayerData
   Enemies: EnemiesData,
   SpecialMoves: SpecialMovesData,
   Equipment: EquipmentData,
-  CharacterLevels: CharacterLevelData
+  CharacterLevels: CharacterLevelData   
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct PlayerData{
+    name: String,
+    attack: i32,
+    hitpoints: i32,
+    weapon: WeaponData,
+    bag: Vec<WeaponData>
+}
+
+pub struct WeaponData
+{
+    name: String,
+    attack: i32,
+}
+
+#[derive(Serialize, Deserialize)]
+#[serde(rename_all = "PascalCase")] // new line
+pub struct Zone{
+    coordinatesX: Vec<i32>,
+    coordinatesY: Vec<i32>,
+    message: String
+}
+
+impl GameData{
+    pub fn initialize(){
+        //initialize grid
+        let mut counterx : i32 = 0;
+        let mut countery : i32 = 0;
+        for x in 0..3{
+            for y in 0..3{
+                let zone: Zone = {x: counterx, y; countery, message: "Test"};
+                GridData[counterx[countery]] = zone;
+            }
+        }
+
+        //Ahora tenemos una grid 3x3 pero que está vacía,
+        //Initialize Enemies in grid
+
+        for x in 0..3{
+            for y in 0..3{
+                
+            }
+        }
+    }
+
+    pub fn roll_dice(num_dice: i32) -> i32 {
+        let mut tiradas: Vec<i32> = Vec::new();
+        let mut rng = rand::thread_rng();
+        let mut total = 0;
+        print!("Rolling {}d6 ", num_dice);
+        print!("Rolled ");
+        for _ in 0..num_dice {
+            let roll = rng.gen_range(1, 7);
+            tiradas.push(roll);
+            print!("[{}]", roll);
+            total += roll;
+        }
+        print!("Total: {}", total);
+        total
+    }
 }
 
 #[derive(serde::Deserialize)]
