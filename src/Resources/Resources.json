@@ -1,0 +1,133 @@
+{
+  "Enemies": 
+  {
+    "EasyEnemies":{
+      "enemy1":{
+        "name":"Skeleton",
+        "diceHealth":2,
+        "attack":1,
+        "Weapon": "Basic",
+        "SpecialMove": ""
+      },
+      "enemy2":{
+        "name":"Zombie",
+        "health":2,
+        "attack":1,
+        "Weapon": "",
+        "SpecialMove": ""
+      },
+      "enemy3":{
+        "name":"Goblin",
+        "health":2,
+        "attack":1,
+        "Weapon": "Basic",
+        "SpecialMove": "Poke"
+      }
+    },
+    "MediumEnemies":{
+      "enemy4":{
+        "name":"Hobgoblin",
+        "health":3,
+        "attack":2,
+        "Weapon": "Intermedium",
+        "SpecialMove": "Slash"
+      },
+      "enemy5":{
+        "name":"Anaconda_King",
+        "health":3,
+        "attack":2,
+        "Weapon": "",
+        "SpecialMove": "Poison"
+      },
+      "enemy6":{
+        "name":"Imp",
+        "health":2,
+        "attack":2,
+        "Weapon": "",
+        "SpecialMove": "Fire_Spark"
+      }
+    },
+    "HardEnemies":{
+      "enemy7":{
+        "name":"Demon",
+        "health":3,
+        "attack":3,
+        "Weapon": "",
+        "SpecialMove": "Fireball"
+      },
+      "enemy8":{
+        "name":"Young Drake",
+        "health":4,
+        "attack":3,
+        "Weapon": "",
+        "SpecialMove": "Bite"
+      },
+      "enemy9":{
+        "name":"Manticore",
+        "health":3,
+        "attack":3,
+        "Weapon": "",
+        "SpecialMove": "Maul"
+      }
+    }
+  },
+  "SpecialMoves":{
+    "SpecialMove1":{
+      "name": "Poke",
+      "attack": 2,
+      "turns": 0,
+      "turnsDamage": 0,
+      "effectApplied": ""
+    },
+    "SpecialMove2":{
+      "name": "Slash",
+      "attack": 3,
+      "turns": 3,
+      "turnsDamage": 1,
+      "effectApplied": "Bleed"
+    },
+    "SpecialMove3":{
+      "name": "Fire_Spark",
+      "attack": 3,
+      "turns": 2,
+      "turnsDamage": 1,
+      "effectApplied": "Burn"
+    },
+    "SpecialMove4":{
+      "name": "Fireball",
+      "attack": 4,
+      "turns": 5,
+      "turnsDamage": 2,
+      "effectApplied": "Burn"
+    },
+    "SpecialMove5":{
+      "name": "Bite",
+      "attack": 3,
+      "turns": 0,
+      "turnsDamage": 0,
+      "effectApplied": ""
+    },
+    "SpecialMove6":{
+      "name": "Maul",
+      "attack": 4,
+      "turns": 3,
+      "turnsDamage": 2,
+      "effectApplied": "Bleed"
+    }
+  },
+  "Equipment":{
+    "BasicWeapons": 1,
+    "MediumWeapons": 2,
+    "GoodWeapons":3
+  },
+  "CharacterLevels":{
+    "Level1": 300,
+    "Level2": 600,
+    "Level3": 900,
+    "Level4": 1400,
+    "Level5": 2000,
+    "Level6": 3000,
+    "Level7": 4500,
+    "Level8": 6500
+  }
+}
