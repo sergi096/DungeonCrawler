@@ -1,4 +1,5 @@
 use serde::{Deserialize, Serialize};
+use std::fs::File;
 mod GameData
 
 #[derive(Serialize, Deserialize)]
@@ -8,17 +9,6 @@ pub struct GameDataJSON{
   SpecialMoves: SpecialMovesDataJSON,
   Equipment: EquipmentDataJSON,
   CharacterLevels: CharacterLevelDataJSON
-}
-
-
-impl GameDataJSON{
-    pub fn readJSON(){
-        //Code to read json into this object:
-    }
-
-    pub fn convertJSONToGameData() -> GameData{
-        //Code to convert from GameDataJSON to GameData per example
-    }
 }
 
 #[derive(serde::Deserialize)]
@@ -32,6 +22,7 @@ pub struct EnemiesDataJSON{
 #[derive(serde::Deserialize)]
 #[serde(rename_all = "PascalCase")]
 pub struct EasyDataJSON{
+  expDice: i32,
   enemy1: EnemyDataJSON,
   enemy2: EnemyDataJSON,
   enemy3: EnemyDataJSON
@@ -40,6 +31,7 @@ pub struct EasyDataJSON{
 #[derive(serde::Deserialize)]
 #[serde(rename_all = "PascalCase")]
 pub struct MediumDataJSON{
+  expDice: i32,
   enemy4: EnemyDataJSON,
   enemy5: EnemyDataJSON,
   enemy6: EnemyDataJSON
@@ -48,6 +40,7 @@ pub struct MediumDataJSON{
 #[derive(serde::Deserialize)]
 #[serde(rename_all = "PascalCase")]
 pub struct HardDataJSON{
+  expDice: i32,
   enemy7: EnemyDataJSON,
   enemy8: EnemyDataJSON,
   enemy9: EnemyDataJSON
@@ -60,7 +53,7 @@ pub struct EnemyDataJSON{
   Health: i32,
   Attack: i32,
   Weapon: String,
-  SpecialMove: String
+  SpecialMove: SpecialMoveData
 }
 
 #[derive(serde::Deserialize)]
@@ -75,17 +68,6 @@ pub struct SpecialMoveDataJSON{
 
 #[derive(serde::Deserialize)]
 #[serde(rename_all = "PascalCase")]
-pub struct SpecialMovesDataJSON{
-  SpecialMove1: SpecialMoveDataJSON,
-  SpecialMove2: SpecialMoveDataJSON,
-  SpecialMove3: SpecialMoveDataJSON,
-  SpecialMove4: SpecialMoveDataJSON,
-  SpecialMove5: SpecialMoveDataJSON,
-  SpecialMove6: SpecialMoveDataJSON
-}
-
-#[derive(serde::Deserialize)]
-#[serde(rename_all = "PascalCase")]
 pub struct CharLevelDataJSON{
   Level1: i32,
   Level2: i32,
@@ -95,4 +77,31 @@ pub struct CharLevelDataJSON{
   Level6: i32,
   Level7: i32,
   Level8: i32
+}
+
+#[derive(serde::Deserialize)]
+#[serde(rename_all = "PascalCase")]
+pub struct EquipmentData{
+  BasicWeapons: i32,
+  MediumWeapons: i32,
+  GoodWeapons: i32
+}
+
+impl GameDataJSON{
+  pub fn readJSON(){
+      //Code to read json into this object:
+      let mut game_data :GameDataJSON= serde_json::from_reader(File::open("./Resources.json"));
+      fillGameData(game_data)
+  }
+
+  pub fn fillGameData(GameData: &game_data) -> GameData  {
+    let mut game: GameData {
+      GridData: null,
+      PlayerData: null,
+      Enemies: game_data.Enemies,
+      Equipment: game_data.Equipment,
+      CharacterLevels: game_data.CharacterLevels
+    }
+    game;
+  }
 }

@@ -6,7 +6,6 @@ pub struct GameData{
   GridData: Vec<Vec<Zone>>,
   PlayerData: PlayerData
   Enemies: EnemiesData,
-  SpecialMoves: SpecialMovesData,
   Equipment: EquipmentData,
   CharacterLevels: CharacterLevelData   
 }
@@ -22,55 +21,24 @@ pub struct PlayerData{
 
 pub struct WeaponData
 {
+    rating: WeaponRating
     name: String,
     attack: i32,
+}
+
+pub enum WeaponRating{
+  Basic,
+  Medium,
+  Advanced,
 }
 
 #[derive(Serialize, Deserialize)]
 #[serde(rename_all = "PascalCase")] // new line
 pub struct Zone{
+    difficulty: String,
     coordinatesX: Vec<i32>,
     coordinatesY: Vec<i32>,
     message: String
-}
-
-impl GameData{
-    pub fn initialize(){
-        //initialize grid
-        let mut counterx : i32 = 0;
-        let mut countery : i32 = 0;
-        for x in 0..3{
-            for y in 0..3{
-                let zone: Zone = {x: counterx, y; countery, message: "Test"};
-                GridData[counterx[countery]] = zone;
-            }
-        }
-
-        //Ahora tenemos una grid 3x3 pero que está vacía,
-        //Initialize Enemies in grid
-
-        for x in 0..3{
-            for y in 0..3{
-                
-            }
-        }
-    }
-
-    pub fn roll_dice(num_dice: i32) -> i32 {
-        let mut tiradas: Vec<i32> = Vec::new();
-        let mut rng = rand::thread_rng();
-        let mut total = 0;
-        print!("Rolling {}d6 ", num_dice);
-        print!("Rolled ");
-        for _ in 0..num_dice {
-            let roll = rng.gen_range(1, 7);
-            tiradas.push(roll);
-            print!("[{}]", roll);
-            total += roll;
-        }
-        print!("Total: {}", total);
-        total
-    }
 }
 
 #[derive(serde::Deserialize)]
@@ -127,17 +95,6 @@ pub struct SpecialMoveData{
 
 #[derive(serde::Deserialize)]
 #[serde(rename_all = "PascalCase")]
-pub struct SpecialMovesData{
-  SpecialMove1: SpecialMoveData,
-  SpecialMove2: SpecialMoveData,
-  SpecialMove3: SpecialMoveData,
-  SpecialMove4: SpecialMoveData,
-  SpecialMove5: SpecialMoveData,
-  SpecialMove6: SpecialMoveData
-}
-
-#[derive(serde::Deserialize)]
-#[serde(rename_all = "PascalCase")]
 pub struct CharLevelData{
   Level1: i32,
   Level2: i32,
@@ -147,4 +104,77 @@ pub struct CharLevelData{
   Level6: i32,
   Level7: i32,
   Level8: i32
+}
+
+impl GameData{
+  pub fn initializeGrid(){
+      //initialize grid
+      for x in 0..3{
+          for y in 0..3{
+              //TODO: Generación aleatoria de zonas
+              let zone: Zone = {difficulty: "Easy", coordinatesX: x, coordinatesX; y, message: "Test"};
+              GridData[x[y]] = zone;
+          }
+      }
+
+      //Ahora tenemos una grid 3x3 pero que está vacía,
+      //Inicializamos enemigos dentro de la grid basándose en su dificultad
+      for x in 0..3{
+          for y in 0..3{
+            if GridData[x[y]].zone.difficulty.eq("Easy"){
+              //TODO: Generación aleatoria de enemigos
+            } else if GridData[x[y]].zone.difficulty.eq("Medium"){
+              //TODO: Generación aleatoria de enemigos
+            } else if GridData[x[y]].zone.difficulty.eq("Hard"){
+              //TODO: Generación aleatoria de enemigos
+            }
+          }
+      }
+
+      //Ahora tenemos nuestra grid con todos sus enemigos y recompensas
+      //Inicializamos datos sobre el jugador
+  }
+
+  pub fn initializePlayer(String &name) -> PlayerData{
+    let attack = roll_dice(2);
+    let hitpoints = roll_dice(2);
+
+    let weapon: WeaponData= generate_weapon_data(WeaponRating.Basic)
+    let player :PlayerData  = {name: &name, attack: &attack, hitpoints: &hitpoints, weapon: null, bag: null}
+    player;
+  }
+
+  pub fn generate_weapon_data(WeaponRating: &rating) -> WeaponData{
+    if &rating.eq(WeaponRating.Basic){
+      //Generar arma con 1 d6 de bonus
+      let names = Vec!["Small Sword", "Rusty Axe", "Wooden Spear", "Old Claws", "2 Small Daggers", ""];
+      let weapon_data = WeaponData{rating: &rating, name: "", attack: roll_dice(1)}
+    } else if &rating.eq(WeaponRating.Medium){
+      //Generar arma con 2 d6 de bonus
+      let weapon_data = WeaponData{rating: &rating, name: "", attack: roll_dice(2)}
+    } else if &rating.eq(WeaponRating.Advanced){
+      //Generar arma con 3 d6 de bonus
+      let weapon_data = WeaponData{rating: &rating, name: "", attack: roll_dice(3)}
+    }
+  }
+
+  pub fn generate_weapon_name(WeaponRating: &rating){
+    if &rating.eq
+  }
+
+  pub fn roll_dice(num_dice: i32) -> i32 {
+      let mut tiradas: Vec<i32> = Vec::new();
+      let mut rng = rand::thread_rng();
+      let mut total = 0;
+      print!("Rolling {}d6 ", num_dice);
+      print!("Rolled ");
+      for _ in 0..num_dice {
+          let roll = rng.gen_range(1, 7);
+          tiradas.push(roll);
+          print!("[{}]", roll);
+          total += roll;
+      }
+      print!("Total: {}", total);
+      total
+  }
 }

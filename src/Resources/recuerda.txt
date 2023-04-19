@@ -1,0 +1,7 @@
+El equipamiento puede ser básico, intermedio o Bueno, Básico da 1d6 bonus, Intermedio 2d6 y Bueno 3d6 sin importar si es arma armadura o objeto
+
+En cada subida de nivel el jugador podrá elegir si aumentar su ataque, su salud o adquirir una nueva habilidad. El personaje empieza con 2d6 de salud y de ataque
+
+Los niveles que aparecen en el json son los puntos de experiencia requeridos para esa subida
+
+Los enemigos faciles generan 2d6 de experiencia, los medios 4d6 y los dificiles 7d6
